@@ -31,13 +31,13 @@ class TestValeurPièces(unittest.TestCase):
 
     def test_valeurs_valides(self):
         for valeur in VALEURS_VALIDES_EN_CENTIMES:
-            with self.subTest(str(valeur) + 'cts'):
+            with self.subTest(Pièce.to_string(valeur)):
                 piece = Pièce(valeur)
                 self.assertEqual(valeur, piece.valeur)
 
     def test_valeurs_invalides(self):
         for valeur in self.__class__.valeurs_invalides_avec_random():
-            with self.subTest(str(valeur) + 'cts'):
+            with self.subTest(Pièce.to_string(valeur)):
                 with self.assertRaises(ValueError):
                     Pièce(valeur)
 
