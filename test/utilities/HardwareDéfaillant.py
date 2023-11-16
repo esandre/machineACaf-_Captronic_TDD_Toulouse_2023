@@ -1,11 +1,13 @@
+from typing import Callable
+
 from hardware.HardwareInterface import HardwareInterface
 
 
 class HardwareDéfaillant(HardwareInterface):
-    def declencher_ecoulement(self):
+    def make_coffee(self) -> int:
         return 1
 
-    def get_compteur_pieces(self):
+    def register_money_inserted_callback(self, callback: Callable[[], int]):
         pass
 
 

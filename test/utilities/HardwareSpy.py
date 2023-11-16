@@ -1,3 +1,5 @@
+from typing import Callable
+
 from hardware.HardwareInterface import HardwareInterface
 
 
@@ -6,11 +8,11 @@ class HardwareSpy(HardwareInterface):
         self.signal_écoulement_reçu = False
         self.__decorated = spied
 
-    def declencher_ecoulement(self):
+    def make_coffee(self) -> int:
         self.signal_écoulement_reçu = True
-        return self.__decorated.declencher_ecoulement()
+        return self.__decorated.make_coffee()
 
-    def get_compteur_pieces(self):
-        return self.__decorated.get_compteur_pieces()
+    def register_money_inserted_callback(self, callback: Callable[[], int]):
+        pass
 
 
