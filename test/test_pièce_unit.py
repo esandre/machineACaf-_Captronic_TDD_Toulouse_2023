@@ -1,4 +1,5 @@
 import random
+import sys
 import unittest
 
 from software.Pièce import Pièce, VALEURS_VALIDES_EN_CENTIMES
@@ -17,6 +18,17 @@ class TestValeurPièces(unittest.TestCase):
             if valeur_inférieure not in VALEURS_VALIDES_EN_CENTIMES:
                 yield valeur_inférieure
 
+    @classmethod
+    def valeurs_invalides_avec_random(cls):
+        valeurs_invalides_testées = list(cls.valeurs_invalides_testées())
+        valeurs_déjà_testées = valeurs_invalides_testées + VALEURS_VALIDES_EN_CENTIMES
+
+        random_value = 0
+        while random_value in valeurs_déjà_testées:
+            random_value = random.randint(0, (sys.maxsize * 2 + 1))
+
+        return valeurs_invalides_testées + [random_value]
+
     def test_valeurs_valides(self):
         for valeur in VALEURS_VALIDES_EN_CENTIMES:
             with self.subTest(str(valeur) + 'cts'):
@@ -24,7 +36,7 @@ class TestValeurPièces(unittest.TestCase):
                 self.assertEqual(valeur, piece.valeur)
 
     def test_valeurs_invalides(self):
-        for valeur in self.__class__.valeurs_invalides_testées():
+        for valeur in self.__class__.valeurs_invalides_avec_random():
             with self.subTest(str(valeur) + 'cts'):
                 with self.assertRaises(ValueError):
                     Pièce(valeur)
