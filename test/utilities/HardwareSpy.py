@@ -2,15 +2,15 @@ from hardware.HardwareInterface import HardwareInterface
 
 
 class HardwareSpy(HardwareInterface):
-    # 0 = tout va bien
-    # Pas zéro = problème (non documenté à ce jour)
-    def __init__(self):
+    def __init__(self, spied: HardwareInterface):
         self.signal_écoulement_reçu = False
+        self.__decorated = spied
 
     def declencher_ecoulement(self):
         self.signal_écoulement_reçu = True
+        return self.__decorated.declencher_ecoulement()
 
     def get_compteur_pieces(self):
-        pass
+        return self.__decorated.get_compteur_pieces()
 
 

@@ -11,8 +11,11 @@ class MachineACafé:
 
     def insérer(self, pièce):
         if pièce.est_supérieure_ou_égale_a(PRIX_DU_CAFE):
-            self.__hardware.declencher_ecoulement()
-            self.__total_encaissé += pièce.valeur
+            code_retour_hardware = self.__hardware.declencher_ecoulement()
+            est_succes = code_retour_hardware == 0
+
+            if est_succes:
+                self.__total_encaissé += pièce.valeur
 
     def get_total_encaissé(self):
         return self.__total_encaissé
