@@ -6,6 +6,7 @@ from software.Pièce import Pièce
 from utilities.HardwareDéfaillant import HardwareDéfaillant
 from utilities.HardwareSpy import HardwareSpy
 from utilities.HardwareStub import HardwareStub
+from utilities.MachineACaféBuilder import MachineACaféBuilder
 
 
 class TestService(unittest.TestCase):
@@ -15,7 +16,7 @@ class TestService(unittest.TestCase):
                 # ETANT DONNE une machine a café reliée à un hardware
                 # ET une pièce d'une valeur supérieure ou égale au prix d'un café
                 hardware = HardwareSpy(HardwareStub())
-                machine_a_café = MachineACafé(hardware)
+                machine_a_café = MachineACaféBuilder().ayant_un_hardware_spécifique(hardware).build()
 
                 # QUAND on insère la pièce
                 machine_a_café.insérer(pièce)
@@ -32,7 +33,7 @@ class TestService(unittest.TestCase):
                 # ETANT DONNE une machine a café reliée à un hardware
                 # ET une pièce d'une valeur valide inférieure au prix du café
                 hardware = HardwareSpy(HardwareStub())
-                machine_a_café = MachineACafé(hardware)
+                machine_a_café = MachineACaféBuilder().ayant_un_hardware_spécifique(hardware).build()
 
                 # QUAND on insère la pièce
                 machine_a_café.insérer(pièce)
@@ -45,9 +46,11 @@ class TestService(unittest.TestCase):
 
     def test_defaut(self):
         # ETANT DONNE une machine a café en erreur
+        machine_a_café = (MachineACaféBuilder()
+                          .ayant_un_hardware_défaillant()
+                          .build())
+
         # ET une pièce d'une valeur égale au prix du café
-        hardware = HardwareDéfaillant()
-        machine_a_café = MachineACafé(hardware)
         pièce = PRIX_DU_CAFE
 
         # QUAND on met une pièce d'une valeur de 50cts
