@@ -21,6 +21,9 @@ class TestService(unittest.TestCase):
                 # ALORS un signal d'écoulement est envoyé au hardware de la machine
                 self.assertTrue(hardware.signal_écoulement_reçu)
 
+                # ET la pièce est encaissée
+                self.assertEqual(pièce.valeur, machine_a_café.get_total_encaissé())
+
     def test_manque_argent(self):
         for pièce in [Pièce(20), Pièce(10), Pièce(5), Pièce(2), Pièce(1)]:
             with self.subTest(str(pièce.valeur) + "cts"):
