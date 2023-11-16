@@ -25,8 +25,8 @@ class TestService(unittest.TestCase):
         hardware = HardwareSpy()
         machine_a_café = MachineACafé(hardware)
 
-        # ET une pièce d'une valeur de 49cts
-        pièce = Pièce(49)
+        # ET une pièce d'une valeur valide inférieure à 50cts
+        pièce = Pièce(20)
 
         # QUAND on insère la pièce
         machine_a_café.insérer(pièce)
