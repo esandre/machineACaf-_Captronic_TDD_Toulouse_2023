@@ -7,11 +7,11 @@ from utilities.MachineACaféHarness import MachineACaféHarness
 
 
 class ServiceTestCase(unittest.TestCase):
-    def assertSignalEcoulementReçu(self, hardware: HardwareSpy):
-        self.assertTrue(hardware.signal_écoulement_reçu)
+    def assertSignalEcoulementReçuParLeHardware(self, machine_a_café: MachineACaféHarness):
+        self.assertTrue(machine_a_café.signal_ecoulement_reçu_par_le_hardware())
 
-    def assertAucunSignalEcoulementReçu(self, hardware: HardwareSpy):
-        self.assertFalse(hardware.signal_écoulement_reçu)
+    def assertAucunSignalEcoulementReçuParLeHardware(self, machine_a_café: MachineACaféHarness):
+        self.assertFalse(machine_a_café.signal_ecoulement_reçu_par_le_hardware())
 
     def assertAucuneSommeEncaissée(self, machine_a_café: MachineACaféHarness):
         self.assertEqual(0, machine_a_café.get_somme_encaissée())

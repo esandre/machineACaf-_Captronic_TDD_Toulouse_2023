@@ -1,11 +1,16 @@
 from software.MachineACafé import MachineACafé
 from software.Pièce import Pièce
+from utilities.HardwareSpy import HardwareSpy
 
 
 class MachineACaféHarness:
-    def __init__(self, harnessed: MachineACafé):
+    def __init__(self, harnessed: MachineACafé, hardware_spy: HardwareSpy):
         self.__harnessed = harnessed
         self.__somme_initiale = harnessed.get_total_encaissé()
+        self.__hardware_spy = hardware_spy
+
+    def signal_ecoulement_reçu_par_le_hardware(self):
+        return self.__hardware_spy.signal_écoulement_reçu
 
     def insérer(self, pièce: Pièce):
         return self.__harnessed.insérer(pièce)

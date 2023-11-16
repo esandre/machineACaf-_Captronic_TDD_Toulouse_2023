@@ -12,16 +12,13 @@ class TestService(ServiceTestCase):
             with self.subTest(str(pièce.valeur) + "cts"):
                 # ETANT DONNE une machine a café reliée à un hardware
                 # ET une pièce d'une valeur supérieure ou égale au prix d'un café
-                hardware = HardwareSpy(HardwareStub())
-                machine_a_café = (MachineACaféBuilder()
-                                  .ayant_un_hardware_spécifique(hardware)
-                                  .build())
+                machine_a_café = MachineACaféBuilder.default()
 
                 # QUAND on insère la pièce
                 machine_a_café.insérer(pièce)
 
                 # ALORS un signal d'écoulement est envoyé au hardware de la machine
-                self.assertSignalEcoulementReçu(hardware)
+                self.assertSignalEcoulementReçuParLeHardware(machine_a_café)
 
                 # ET la pièce est encaissée
                 self.assertPièceEncaissée(machine_a_café, pièce)
@@ -31,14 +28,13 @@ class TestService(ServiceTestCase):
             with self.subTest(str(pièce.valeur) + "cts"):
                 # ETANT DONNE une machine a café reliée à un hardware
                 # ET une pièce d'une valeur valide inférieure au prix du café
-                hardware = HardwareSpy(HardwareStub())
-                machine_a_café = MachineACaféBuilder().ayant_un_hardware_spécifique(hardware).build()
+                machine_a_café = MachineACaféBuilder.default()
 
                 # QUAND on insère la pièce
                 machine_a_café.insérer(pièce)
 
                 # ALORS aucun signal d'écoulement n'est envoyé au hardware de la machine
-                self.assertAucunSignalEcoulementReçu(hardware)
+                self.assertAucunSignalEcoulementReçuParLeHardware(machine_a_café)
 
                 # ET la pièce est rendue
                 self.assertAucuneSommeEncaissée(machine_a_café)
