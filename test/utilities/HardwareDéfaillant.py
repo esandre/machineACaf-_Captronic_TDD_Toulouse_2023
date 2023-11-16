@@ -7,7 +7,7 @@ class HardwareDéfaillant(HardwareInterface):
     def make_coffee(self) -> int:
         return 1
 
-    def register_money_inserted_callback(self, callback: Callable[[], int]):
+    def register_money_inserted_callback(self, callback: Callable[[int], bool]):
         pass
 
 

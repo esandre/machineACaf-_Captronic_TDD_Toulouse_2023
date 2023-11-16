@@ -12,7 +12,7 @@ class HardwareSpy(HardwareInterface):
         self.signal_écoulement_reçu = True
         return self.__decorated.make_coffee()
 
-    def register_money_inserted_callback(self, callback: Callable[[], int]):
+    def register_money_inserted_callback(self, callback: Callable[[int], bool]):
         pass
 
 
