@@ -6,7 +6,7 @@ PRIX_DU_CAFE = Pièce(50)
 
 class MachineACafé:
     def __init__(self, hardware: HardwareInterface):
-        self.__total_encaissé = 0
+        self.__total_encaissé = 50
         self.__hardware = hardware
 
     def insérer(self, pièce: Pièce):

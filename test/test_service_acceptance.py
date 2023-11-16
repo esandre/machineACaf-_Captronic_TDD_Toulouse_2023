@@ -13,7 +13,9 @@ class TestService(ServiceTestCase):
                 # ETANT DONNE une machine a café reliée à un hardware
                 # ET une pièce d'une valeur supérieure ou égale au prix d'un café
                 hardware = HardwareSpy(HardwareStub())
-                machine_a_café = MachineACaféBuilder().ayant_un_hardware_spécifique(hardware).build()
+                machine_a_café = (MachineACaféBuilder()
+                                  .ayant_un_hardware_spécifique(hardware)
+                                  .build())
 
                 # QUAND on insère la pièce
                 machine_a_café.insérer(pièce)
@@ -42,16 +44,10 @@ class TestService(ServiceTestCase):
                 self.assertAucuneSommeEncaissée(machine_a_café)
 
     def test_defaut(self):
-        # ETANT DONNE une machine a café en erreur
         machine_a_café = (MachineACaféBuilder()
                           .ayant_un_hardware_défaillant()
                           .build())
 
-        # ET une pièce d'une valeur égale au prix du café
-        pièce = PRIX_DU_CAFE
+        machine_a_café.insérer(PRIX_DU_CAFE)
 
-        # QUAND on met une pièce d'une valeur de 50cts
-        machine_a_café.insérer(pièce)
-
-        # ALORS la pièce est rendue
         self.assertAucuneSommeEncaissée(machine_a_café)

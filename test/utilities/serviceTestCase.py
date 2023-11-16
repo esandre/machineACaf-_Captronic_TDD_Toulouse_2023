@@ -3,6 +3,7 @@ import unittest
 from software.MachineACafé import MachineACafé
 from software.Pièce import Pièce
 from utilities.HardwareSpy import HardwareSpy
+from utilities.MachineACaféHarness import MachineACaféHarness
 
 
 class ServiceTestCase(unittest.TestCase):
@@ -12,8 +13,8 @@ class ServiceTestCase(unittest.TestCase):
     def assertAucunSignalEcoulementReçu(self, hardware: HardwareSpy):
         self.assertFalse(hardware.signal_écoulement_reçu)
 
-    def assertAucuneSommeEncaissée(self, machine_a_café: MachineACafé):
-        self.assertEqual(0, machine_a_café.get_total_encaissé())
+    def assertAucuneSommeEncaissée(self, machine_a_café: MachineACaféHarness):
+        self.assertEqual(0, machine_a_café.get_somme_encaissée())
 
-    def assertPièceEncaissée(self, machine_a_café: MachineACafé, pièce: Pièce):
-        self.assertEqual(pièce.valeur, machine_a_café.get_total_encaissé())
+    def assertPièceEncaissée(self, machine_a_café: MachineACaféHarness, pièce: Pièce):
+        self.assertEqual(pièce.valeur, machine_a_café.get_somme_encaissée())
