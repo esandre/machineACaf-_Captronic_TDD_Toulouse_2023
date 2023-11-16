@@ -15,6 +15,19 @@ class TestService(unittest.TestCase):
         # QUAND on insère la pièce
         machine_a_café.insérer(valeur_pièce_en_centimes)
 
-        # ALORS un signal d'écoulement est envoyé au hardware la machine
+        # ALORS un signal d'écoulement est envoyé au hardware de la machine
         self.assertTrue(hardware.signal_écoulement_reçu)
 
+    def test_manque_argent(self):
+        # ETANT DONNE une machine a café reliée à un hardware
+        hardware = HardwareSpy()
+        machine_a_café = MachineACafé(hardware)
+
+        # ET une pièce d'une valeur de 49cts
+        valeur_pièce_en_centimes = 49
+
+        # QUAND on insère la pièce
+        machine_a_café.insérer(valeur_pièce_en_centimes)
+
+        # ALORS aucun signal d'écoulement n'est envoyé au hardware de la machine
+        self.assertFalse(hardware.signal_écoulement_reçu)

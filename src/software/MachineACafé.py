@@ -3,5 +3,6 @@ class MachineACafé:
         self.__hardware = hardware
 
     def insérer(self, valeurPièceEnCentimes):
-        self.__hardware.declencher_ecoulement()
+        if valeurPièceEnCentimes >= 50:
+            self.__hardware.declencher_ecoulement()
         pass
