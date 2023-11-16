@@ -1,15 +1,12 @@
-import unittest
-
-from software.MachineACafé import MachineACafé
 from software.MachineACafé import PRIX_DU_CAFE
 from software.Pièce import Pièce
-from utilities.HardwareDéfaillant import HardwareDéfaillant
 from utilities.HardwareSpy import HardwareSpy
 from utilities.HardwareStub import HardwareStub
 from utilities.MachineACaféBuilder import MachineACaféBuilder
+from utilities.serviceTestCase import ServiceTestCase
 
 
-class TestService(unittest.TestCase):
+class TestService(ServiceTestCase):
     def test_cas_nominal(self):
         for pièce in [PRIX_DU_CAFE, Pièce(100), Pièce(200)]:
             with self.subTest(str(pièce.valeur) + "cts"):
@@ -22,10 +19,10 @@ class TestService(unittest.TestCase):
                 machine_a_café.insérer(pièce)
 
                 # ALORS un signal d'écoulement est envoyé au hardware de la machine
-                self.assertTrue(hardware.signal_écoulement_reçu)
+                self.assertSignalEcoulementReçu(hardware)
 
                 # ET la pièce est encaissée
-                self.assertEqual(pièce.valeur, machine_a_café.get_total_encaissé())
+                self.assertPièceEncaissée(machine_a_café, pièce)
 
     def test_manque_argent(self):
         for pièce in [Pièce(20), Pièce(10), Pièce(5), Pièce(2), Pièce(1)]:
@@ -39,10 +36,10 @@ class TestService(unittest.TestCase):
                 machine_a_café.insérer(pièce)
 
                 # ALORS aucun signal d'écoulement n'est envoyé au hardware de la machine
-                self.assertFalse(hardware.signal_écoulement_reçu)
+                self.assertAucunSignalEcoulementReçu(hardware)
 
                 # ET la pièce est rendue
-                self.assertEqual(0, machine_a_café.get_total_encaissé())
+                self.assertAucuneSommeEncaissée(machine_a_café)
 
     def test_defaut(self):
         # ETANT DONNE une machine a café en erreur
@@ -57,4 +54,4 @@ class TestService(unittest.TestCase):
         machine_a_café.insérer(pièce)
 
         # ALORS la pièce est rendue
-        self.assertEqual(0, machine_a_café.get_total_encaissé())
+        self.assertAucuneSommeEncaissée(machine_a_café)
