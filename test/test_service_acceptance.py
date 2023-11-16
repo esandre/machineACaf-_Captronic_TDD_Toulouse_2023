@@ -37,3 +37,6 @@ class TestService(unittest.TestCase):
 
                 # ALORS aucun signal d'écoulement n'est envoyé au hardware de la machine
                 self.assertFalse(hardware.signal_écoulement_reçu)
+
+                # ET la pièce est rendue
+                self.assertEqual(0, machine_a_café.get_total_encaissé())

@@ -12,7 +12,7 @@ class MachineACafé:
     def insérer(self, pièce):
         if pièce.est_supérieure_ou_égale_a(PRIX_DU_CAFE):
             self.__hardware.declencher_ecoulement()
-        self.__total_encaissé += pièce.valeur
+            self.__total_encaissé += pièce.valeur
 
     def get_total_encaissé(self):
         return self.__total_encaissé
