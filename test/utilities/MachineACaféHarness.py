@@ -10,7 +10,7 @@ class MachineACaféHarness:
         self.__hardware_spy = hardware_spy
 
     def signal_ecoulement_reçu_par_le_hardware(self):
-        return self.__hardware_spy.signal_écoulement_reçu
+        return self.__hardware_spy.make_coffee_appelé
 
     def insérer(self, pièce: Pièce):
         return self.__harnessed.insérer(pièce)

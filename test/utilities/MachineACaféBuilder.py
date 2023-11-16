@@ -7,7 +7,7 @@ from utilities.MachineACaféHarness import MachineACaféHarness
 
 
 class MachineACaféBuilder:
-    __hardware : HardwareInterface = HardwareStub()
+    __hardware: HardwareInterface = HardwareStub()
 
     @classmethod
     def default(cls) -> MachineACaféHarness:
