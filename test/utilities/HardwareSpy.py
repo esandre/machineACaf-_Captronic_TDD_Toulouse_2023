@@ -1,4 +1,7 @@
-class HardwareSpy():
+from hardware.HardwareInterface import HardwareInterface
+
+
+class HardwareSpy(HardwareInterface):
     # 0 = tout va bien
     # Pas zéro = problème (non documenté à ce jour)
     def __init__(self):
