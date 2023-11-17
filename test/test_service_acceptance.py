@@ -20,6 +20,7 @@ class TestService(ServiceTestCase):
             with self.subTest(str(pièce.valeur) + "cts"):
                 machine_a_café = MachineACaféBuilder.default()
 
+
                 machine_a_café.insérer(pièce)
 
                 self.assertAucunSignalEcoulementReçuParLeHardware(machine_a_café)

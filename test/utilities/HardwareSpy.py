@@ -17,7 +17,7 @@ class HardwareSpy(HardwareInterface):
         return self.__decorated.make_product()
 
     def register_money_inserted_callback(self, callback: Callable[[int], bool]):
-        pass
+        return self.__decorated.register_money_inserted_callback(callback)
 
     def make_product_appelé(self):
         return len(self.__make_product_invocations) > 0
