@@ -4,7 +4,7 @@ from hardware.HardwareInterface import HardwareInterface
 
 
 class HardwareStub(HardwareInterface):
-    def make_coffee(self) -> int:
+    def make_product(self) -> int:
         return 0
 
     def register_money_inserted_callback(self, callback: Callable[[int], bool]):

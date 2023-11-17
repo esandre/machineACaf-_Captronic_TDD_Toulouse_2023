@@ -11,7 +11,7 @@ class MachineACafé:
 
     def insérer(self, pièce: Pièce):
         if pièce.est_supérieure_ou_égale_a(PRIX_DU_CAFE):
-            code_retour_hardware = self.__hardware.make_coffee()
+            code_retour_hardware = self.__hardware.make_product()
             est_succes = code_retour_hardware == 0
 
             if est_succes:
